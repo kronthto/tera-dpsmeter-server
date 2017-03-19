@@ -26,11 +26,19 @@ class DpsController extends Controller
             $statEntity->save();
         } catch (QueryException $queryException) {
             if ($queryException->getCode() == 23000) { // Duplicate key
-                return response('This encounter has already been saved');
+                $existing = Stat::findExisting($statEntity);
+
+                return response()->json([
+                    'message' => 'This encounter has already been saved',
+                    'id' => $existing->id,
+                ]);
             }
             throw $queryException;
         }
 
-        return response('Encounter saved! Thanks!', Response::HTTP_CREATED);
+        return response()->json([
+            'message' => 'Encounter saved! Thanks!',
+            'id' => $statEntity->id,
+        ], Response::HTTP_CREATED);
     }
 }

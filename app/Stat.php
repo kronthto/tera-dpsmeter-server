@@ -33,4 +33,20 @@ class Stat extends Model
     {
         $this->attributes['encounter_unix'] = $this->asTimestamp($data);
     }
+
+    /**
+     * Find an existing Stat based on unique constraint.
+     *
+     * @param Stat $stat
+     *
+     * @return Stat|null
+     */
+    public static function findExisting(Stat $stat)
+    {
+        return self::query()
+            ->where('area_id', $stat->area_id)
+            ->where('boss_id', $stat->boss_id)
+            ->where('encounter_unix', $stat->encounter_unix->getTimestamp())
+            ->get()->first();
+    }
 }
