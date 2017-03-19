@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/shared/servertime', function () {
+    return response()->json(['serverTime' => time()]);
+});
