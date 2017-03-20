@@ -17,6 +17,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Stat extends Model
 {
+    protected $perPage = 50;
+
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $casts = [
