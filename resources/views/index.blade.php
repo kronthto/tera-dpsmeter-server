@@ -19,7 +19,7 @@
                 <td>{{ $encounter->getAreaName() }}</td>
                 <td>{{ $encounter->getMonsterName() }}</td>
                 <td>{{ gmdate('H:i:s', $encounter->data->fightDuration) }}</td>
-                <td>{{ \App\Stat::damageFormat($encounter->data->partyDps)  }}/s</td>
+                <td>{{ \App\Stat::damageFormat($encounter->data->partyDps)  }}</td>
                 <td><a href="{{ route('getStat', $encounter) }}" target="_blank">Raw</a></td>
             </tr>
         @endforeach
