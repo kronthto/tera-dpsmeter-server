@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Stat;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,3 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::any('/submitdps', 'DpsController@takeDpsSubmit');
+
+Route::get('/stat/{stat}', function (Stat $stat) {
+    return $stat;
+})->name('getStat');
