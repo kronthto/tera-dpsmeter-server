@@ -10,6 +10,7 @@ Developed using [ShinraMeter](https://github.com/neowutran/ShinraMeter) as DPS-M
 ## Features
 
 * Store encounters in database
+* Show latest encounters
 
 ## Endpoints
 
