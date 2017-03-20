@@ -11,3 +11,7 @@ Homestead.yaml
 .php_cs.cache
 .phpstorm.meta.php
 _ide_helper.php
+/mix.js
+mix-manifest.json
+
+public/build

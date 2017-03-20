@@ -1,9 +1,17 @@
-
-// Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-
 // Variables
 @import "variables";
 
-// Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+html {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.15; /* 2 */
+  -ms-text-size-adjust: 100%; /* 3 */
+  -webkit-text-size-adjust: 100%; /* 3 */
+  font-size: 1em;
+}
+
+body {
+  text-align: center;
+  margin: 60px 20px;
+  color: #16162b;
+  -webkit-font-smoothing: antialiased !important
+}

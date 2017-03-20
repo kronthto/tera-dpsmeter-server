@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <table>
+    <table style="width: 100%">
         <thead>
         <tr>
             <th>When</th>
