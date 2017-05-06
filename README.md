@@ -38,7 +38,7 @@ $ ./artisan migrate
 The MIT License (MIT). Please see the [License File](LICENSE.md) for more information.
 
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-githubversion]: https://poser.pugx.org/kronthto/tera-dpsmeter-server/v/stable
+[ico-githubversion]: https://badge.fury.io/gh/kronthto%2Ftera-dpsmeter-server.svg
 
 [link-releases]: https://github.com/kronthto/tera-dpsmeter-server/releases
 [link-contributors]: ../../contributors
