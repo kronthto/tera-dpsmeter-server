@@ -18,6 +18,7 @@ Developed using [ShinraMeter](https://github.com/neowutran/ShinraMeter) as DPS-M
 * `/api/submitdps`
 * `/api/allowed`
 * `/shared/servertime`
+* `/api/shinra/servertime`
 
 ## Install
 

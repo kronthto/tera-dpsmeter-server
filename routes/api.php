@@ -15,8 +15,12 @@ use App\Stat;
 
 Route::any('/submitdps', 'DpsController@takeDpsSubmit');
 
-Route::any('/allowed', 'DpsController@allowedInfo');
+Route::get('/allowed', 'DpsController@allowedInfo');
 
 Route::get('/stat/{stat}', function (Stat $stat) {
     return $stat;
 })->name('getStat');
+
+Route::get('/shinra/servertime', function () {
+    return response()->json(['serverTime' => time()]);
+});
