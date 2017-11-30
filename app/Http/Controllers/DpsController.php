@@ -41,4 +41,11 @@ class DpsController extends Controller
             'id' => $statEntity->id,
         ], Response::HTTP_CREATED);
     }
+
+    public function allowedInfo()
+    {
+        return response()->json(array_map(function ($regionId) {
+            return ['AreaId' => $regionId, 'BossIds' => []];
+        }, config('tera.allowedRegions')));
+    }
 }

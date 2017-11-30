@@ -11,10 +11,12 @@ Developed using [ShinraMeter](https://github.com/neowutran/ShinraMeter) as DPS-M
 
 * Store encounters in database
 * Show latest encounters
+* Define list of "allowed" regions in config
 
 ## Endpoints
 
 * `/api/submitdps`
+* `/api/allowed`
 * `/shared/servertime`
 
 ## Install
