@@ -9,6 +9,25 @@ class TeraData
     /** @var array|string[][] */
     public $monsterMap = [];
 
+    public function getAreaNameById($id)
+    {
+        if (!array_key_exists($id, $this->zoneMap)) {
+            return null;
+        }
+
+        return $this->zoneMap[$id];
+    }
+
+    public function getMonsterNameByAreaAndId($areaid, $monsterid)
+    {
+        if (!array_key_exists($areaid, $this->monsterMap)) {
+            return null;
+        }
+
+        // Assume that if the map exists, we also have info about all the monsters.
+        return $this->monsterMap[$areaid][$monsterid];
+    }
+
     /**
      * TeraData constructor.
      */

@@ -45,7 +45,7 @@ class Stat extends Model
      */
     public function getAreaName()
     {
-        return app('tera.data')->zoneMap[$this->area_id];
+        return app('tera.data')->getAreaNameById($this->area_id);
     }
 
     /**
@@ -55,7 +55,7 @@ class Stat extends Model
      */
     public function getMonsterName()
     {
-        return app('tera.data')->monsterMap[$this->area_id][$this->boss_id];
+        return app('tera.data')->getMonsterNameByAreaAndId($this->area_id, $this->boss_id);
     }
 
     /**
