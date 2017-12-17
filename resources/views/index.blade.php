@@ -1,6 +1,56 @@
 @extends('layouts.app')
 
 @section('content')
+    <h1><abbr title="The Exiled Realm of Arborea">TERA</abbr> DPS Stats</h1>
+    <h2>Best DPS by Boss (last week)</h2>
+    <style>
+        .dpsCard {
+            break-inside: avoid-column;
+            text-align: left;
+        }
+
+        .columnList {
+            column-count: 4;
+            column-gap: 20px;
+        }
+
+        @media (max-width: 1100px) {
+            .columnList {
+                column-count: 3;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .columnList {
+                column-count: 2;
+            }
+        }
+
+        @media (max-width: 460px) {
+            .columnList {
+                column-count: 1;
+            }
+        }
+    </style>
+    <div class="columnList">
+        @foreach($byBoss as $boss)
+            <?php $encounter = reset($boss)->stat; ?>
+            <div class="dpsCard">
+                <h3>{{ $encounter->getMonsterName() }} - {{ $encounter->getAreaName() }}</h3>
+                <ol>
+                    @foreach(array_slice($boss, 0, 5) as $member)
+                        <li>
+                            <abbr title="{{ $member->playerClass }} of {{ $member->guild ?? '-' }}, {{ $member->playerServer }}">{{ $member->playerName }}</abbr>
+                            - {{ \App\Stat::damageFormat($member->playerDps) }}/s (<a
+                                    href="{{ route('getStat', $member->stat ) }}" target="_blank">#</a>)
+                        </li>
+                    @endforeach
+                </ol>
+            </div>
+        @endforeach
+    </div>
+
+    <h2>Latest submitted encounters</h2>
     <table style="width:100%;table-layout:fixed">
         <thead>
         <tr>

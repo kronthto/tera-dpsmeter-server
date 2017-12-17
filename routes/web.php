@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('index', [
         'encounters' => \App\Stat::getLatestPaginator(),
+        'byBoss' => app(\App\Service\StatService::class)->getByBossLastW(),
     ]);
 });
 
