@@ -1,7 +1,6 @@
 # TERA DPS-Meter Server - Collect stats
 
 [![Software License][ico-license]](LICENSE.md)
-[![Latest Stable Version][ico-githubversion]][link-releases]
 
 This app allows you to host your own DPS-meter statistic server.
 
@@ -11,6 +10,7 @@ Developed using [ShinraMeter](https://github.com/neowutran/ShinraMeter) as DPS-M
 
 * Store encounters in database
 * Show latest encounters
+* Show Top-DPS by boss of recent time period
 * Define list of "allowed" regions in config
 
 ## Endpoints
@@ -21,6 +21,8 @@ Developed using [ShinraMeter](https://github.com/neowutran/ShinraMeter) as DPS-M
 * `/api/shinra/servertime`
 
 ## Install
+
+*Make sure to recursively clone also the teradata submodule.*
 
 ``` bash
 $ composer install (--no-dev -o)
@@ -41,7 +43,4 @@ $ ./artisan migrate
 The MIT License (MIT). Please see the [License File](LICENSE.md) for more information.
 
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-githubversion]: https://badge.fury.io/gh/kronthto%2Ftera-dpsmeter-server.svg
-
-[link-releases]: https://github.com/kronthto/tera-dpsmeter-server/releases
 [link-contributors]: ../../contributors
