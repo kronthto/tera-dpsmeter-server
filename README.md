@@ -36,7 +36,7 @@ $ ./artisan migrate
 
 ## Usage
 
-Refer to https://github.com/neowutran/ShinraMeter/wiki/Private-DPS-server#dps-meter-configuration , using the [endpoints](#Endpoints).
+Refer to https://github.com/neowutran/ShinraMeter/wiki/Private-DPS-server#dps-meter-configuration , using the [endpoints](#endpoints).
 
 ## Credits
 
