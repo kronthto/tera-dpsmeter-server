@@ -41,6 +41,7 @@ Refer to https://github.com/neowutran/ShinraMeter/wiki/Private-DPS-server#dps-me
 ## Credits
 
 - [All Contributors][link-contributors]
+- https://github.com/neowutran/TeraDpsMeterData
 
 ## License
 
