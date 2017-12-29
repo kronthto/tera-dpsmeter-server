@@ -12,9 +12,12 @@
     <![endif]-->
 </head>
 <body>
-<div class="container">
+<main>
     @yield('content')
-</div>
+</main>
+<footer role="contentinfo" style="margin-top: 20px; font-size: 80%;">
+    <a href="https://github.com/kronthto/tera-dpsmeter-server" title="TERA DPS-Meter Server source code">source on GitHub</a>
+</footer>
 <!--[if !IE]> -->
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" crossorigin="anonymous">
 <!-- <![endif]-->

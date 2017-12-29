@@ -2,7 +2,6 @@
 
 @section('content')
     <h1><abbr title="The Exiled Realm of Arborea">TERA</abbr> DPS Stats</h1>
-    <h2>Best DPS by Boss (last week)</h2>
     <style>
         .dpsCard {
             break-inside: avoid-column;
@@ -32,6 +31,8 @@
             }
         }
     </style>
+    <section>
+    <h2>Best DPS by Boss (last week)</h2>
     <div class="columnList">
         @foreach($byBoss as $boss)
             <?php $encounter = reset($boss)->stat; ?>
@@ -49,7 +50,9 @@
             </div>
         @endforeach
     </div>
+    </section>
 
+    <section>
     <h2>Latest submitted encounters</h2>
     <table style="width:100%;table-layout:fixed">
         <thead>
@@ -73,4 +76,5 @@
         @endforeach
         </tbody>
     </table>
+    </section>
 @endsection
