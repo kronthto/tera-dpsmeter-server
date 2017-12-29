@@ -12,9 +12,12 @@
 */
 
 Route::get('/', function () {
+    $statsSince = \Carbon\Carbon::now()->subWeeks(1)->startOfDay();
+
     return view('index', [
         'encounters' => \App\Stat::getLatestPaginator(),
-        'byBoss' => app(\App\Service\StatService::class)->getByBossLastW(),
+        'byBoss' => app(\App\Service\StatService::class)->getByBossSince($statsSince),
+        'statsSince' => $statsSince,
     ]);
 });
 

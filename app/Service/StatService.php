@@ -3,14 +3,13 @@
 namespace App\Service;
 
 use App\Stat;
-use Carbon\Carbon;
 
 class StatService
 {
-    public function getByBossLastW()
+    public function getByBossSince(\DateTimeInterface $since)
     {
         $stats = Stat::query()
-            ->where('encounter_unix', '>=', Carbon::now()->subWeeks(1)->getTimestamp())
+            ->where('encounter_unix', '>=', $since->getTimestamp())
             ->get();
 
         $byBoss = [];

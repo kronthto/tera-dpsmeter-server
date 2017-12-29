@@ -32,7 +32,7 @@
         }
     </style>
     <section>
-    <h2>Best DPS by Boss (last week)</h2>
+    <h2>Recent Best DPS by Boss</h2>
     <div class="columnList">
         @foreach($byBoss as $boss)
             <?php $encounter = reset($boss)->stat; ?>
@@ -50,6 +50,7 @@
             </div>
         @endforeach
     </div>
+    <span>Checked stats since {{ $statsSince->toFormattedDateString() }}</span>
     </section>
 
     <section>
