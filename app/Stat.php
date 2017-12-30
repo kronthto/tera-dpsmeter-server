@@ -71,6 +71,9 @@ class Stat extends Model
         $x_array = explode(',', $x_number_format);
         $x_parts = array('k', 'M', 'b');
         $x_count_parts = count($x_array) - 1;
+        if ($x_count_parts === 0) {
+            return $num;
+        }
         $x_display = $x_array[0].((int) $x_array[1][0] !== 0 ? '.'.$x_array[1][0] : '');
         $x_display .= $x_parts[$x_count_parts - 1];
 
