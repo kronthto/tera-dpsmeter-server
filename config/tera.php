@@ -16,5 +16,9 @@ return [
         760, // Kalivan's Dreadnaught
         710, // Broken Prison
         810, // Lakan's Prison
+        770, // Ruinous Manor
+        970, // Ruinous Manor (Hard)
+        813, // Ghillieglade (1-Person)
+        713, // Ghillieglade
     ],
 ];
