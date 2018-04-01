@@ -1,5 +1,7 @@
 <?php
 
+use App\Stat;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +37,10 @@ Route::get('/', function (\Illuminate\Http\Request $request) {
         'statsSince' => $statsSince,
     ]);
 });
+
+Route::get('/encounter/{stat}', function (Stat $stat) {
+    dd($stat);
+})->name('statDetail');
 
 Route::get('/shared/servertime', function () {
     return response()->json(['serverTime' => time()]);

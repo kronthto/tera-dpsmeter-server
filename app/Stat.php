@@ -58,6 +58,16 @@ class Stat extends Model
         return app('tera.data')->getMonsterNameByAreaAndId($this->area_id, $this->boss_id);
     }
 
+    public function toString()
+    {
+        return $this->getMonsterName().' at '.$this->encounter_unix;
+    }
+
+    public function getTitle()
+    {
+        return 'Encounter: '.$this->toString();
+    }
+
     /**
      * Formats a number to a string with k m for thousands.
      *

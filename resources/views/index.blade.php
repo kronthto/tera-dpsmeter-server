@@ -36,14 +36,14 @@
     <div class="columnList">
         @foreach($byBoss as $boss)
             <?php $encounter = reset($boss)->stat; ?>
-            <div class="dpsCard">
+            <div class="dpsCard" data-boss-id="{{ $encounter->boss_id }}" data-area-id="{{ $encounter->area_id }}">
                 <h3>{{ $encounter->getMonsterName() }} - {{ $encounter->getAreaName() }}</h3>
                 <ol>
                     @foreach(array_slice($boss, 0, 5) as $member)
-                        <li>
+                        <li data-when="{{ $member->stat->encounter_unix }}">
                             <abbr title="{{ $member->playerClass }} of {{ $member->guild ?? '-' }}, {{ $member->playerServer }}">{{ $member->playerName }}</abbr>
-                            - {{ \App\Stat::damageFormat($member->playerDps) }}/s (<a
-                                    href="{{ route('getStat', $member->stat ) }}" target="_blank">#</a>)
+                            - <abbr title="{{ $member->playerDps }}">{{ \App\Stat::damageFormat($member->playerDps) }}</abbr>/s (<a
+                                    href="{{ route('statDetail', $member->stat ) }}" title="{{ $encounter->getTitle() }}" target="_blank">#</a>)
                         </li>
                     @endforeach
                 </ol>
@@ -69,10 +69,10 @@
         @foreach($encounters as $encounter)
             <tr>
                 <td>{{ $encounter->encounter_unix }}</td>
-                <td>{{ $encounter->getMonsterName() }} - {{ $encounter->getAreaName() }}</td>
+                <td data-boss-id="{{ $encounter->boss_id }}" data-area-id="{{ $encounter->area_id }}">{{ $encounter->getMonsterName() }} - {{ $encounter->getAreaName() }}</td>
                 <td>{{ gmdate('i:s', $encounter->data->fightDuration) }}</td>
-                <td>{{ \App\Stat::damageFormat($encounter->data->partyDps)  }}</td>
-                <td><a href="{{ route('getStat', $encounter) }}" target="_blank">Raw</a></td>
+                <td><abbr title="{{ $encounter->data->partyDps }}">{{ \App\Stat::damageFormat($encounter->data->partyDps)  }}</abbr></td>
+                <td><a href="{{ route('statDetail', $encounter) }}" target="_blank" title="{{ $encounter->getTitle() }}">Detail</a> <a href="{{ route('getStat', $encounter) }}" target="_blank" title="JSON-Data: {{ $encounter->getTitle() }}">Raw</a></td>
             </tr>
         @endforeach
         </tbody>
