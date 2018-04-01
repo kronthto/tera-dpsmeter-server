@@ -2,6 +2,8 @@
 
 return [
     'monstersDb' => env('TERA_MONSTERS', 'monsters/monsters-EU-EN.xml'),
+    'hotdotDb' => env('TERA_HOTDOT', 'hotdot/hotdot-EU-EN.tsv'),
+    'skillsDb' => env('TERA_SKILLS', 'skills/skills-EU-EN.tsv'),
     'allowedRegions' => [
         735, // RK-9 Kennel
         935, // RK-9 Kennel (Hard)

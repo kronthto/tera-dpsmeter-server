@@ -5,11 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <meta name="language" content="{{ config('app.locale') }}">
-    <title>TERA DPS Server</title>
+    <title>TERA DPS Server - @yield('title')</title>
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css" crossorigin="anonymous">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
     <!--[if IE]>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" crossorigin="anonymous">
     <![endif]-->
+    @yield('meta')
 </head>
 <body>
 <main>

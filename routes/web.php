@@ -39,7 +39,7 @@ Route::get('/', function (\Illuminate\Http\Request $request) {
 });
 
 Route::get('/encounter/{stat}', function (Stat $stat) {
-    dd($stat);
+    return view('encounter', ['stat' => $stat]);
 })->name('statDetail');
 
 Route::get('/shared/servertime', function () {
