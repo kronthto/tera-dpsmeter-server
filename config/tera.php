@@ -20,5 +20,7 @@ return [
         970, // Ruinous Manor (Hard)
         813, // Ghillieglade (1-Person)
         713, // Ghillieglade
+        911, // Kelsaik's Raid (10-Person)
+        975, // Kelsaik's Raid (20-Person)
     ],
 ];
