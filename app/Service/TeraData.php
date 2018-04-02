@@ -57,6 +57,29 @@ class TeraData
      */
     public function __construct()
     {
+        $data = \Cache::get('teradata');
+
+        if (!$data) {
+            $this->loadData();
+
+            $data = new \stdClass();
+            $data->monsterMap = $this->monsterMap;
+            $data->zoneMap = $this->zoneMap;
+            $data->hotdotMap = $this->hotdotMap;
+            $data->skillMap = $this->skillMap;
+
+            \Cache::put('teradata', $data, 180);
+
+        } else {
+            $this->zoneMap = $data->zoneMap;
+            $this->monsterMap = $data->monsterMap;
+            $this->hotdotMap = $data->hotdotMap;
+            $this->skillMap = $data->skillMap;
+        }
+    }
+
+    protected function loadData()
+    {
         $data = simplexml_load_file(base_path('teradata/'.config('tera.monstersDb')));
 
         foreach ($data->Zone as $zone) {
