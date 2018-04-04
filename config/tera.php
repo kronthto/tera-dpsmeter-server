@@ -5,6 +5,7 @@ return [
     'hotdotDb' => env('TERA_HOTDOT', 'hotdot/hotdot-EU-EN.tsv'),
     'skillsDb' => env('TERA_SKILLS', 'skills/skills-EU-EN.tsv'),
     'allowedRegions' => [
+        126, // Pit of Petrax
         735, // RK-9 Kennel
         935, // RK-9 Kennel (Hard)
         950, // Harrowhold
