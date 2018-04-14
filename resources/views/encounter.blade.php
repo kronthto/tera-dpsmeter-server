@@ -80,7 +80,7 @@
                     <tbody>
                     @foreach($member->skillLog as $skill)
                         <?php
-                        $skillDb = app('tera.data')->getSkillById((int)$skill->skillId);
+                        $skillDb = app('tera.data')->getSkillById((int)$skill->skillId, $member->playerClass);
                         ?>
                         <tr>
                             <td data-id="{{ $skill->skillId }}">{{ $skillDb ? $skillDb[4] : $skill->skillId }}</td>

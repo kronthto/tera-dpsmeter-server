@@ -43,13 +43,14 @@ class TeraData
         return $this->hotdotMap[$id];
     }
 
-    public function getSkillById($id)
+    public function getSkillById($id, $class)
     {
-        if (!array_key_exists($id, $this->skillMap)) {
+        $key = strtolower($class).'_'.$id;
+        if (!array_key_exists($key, $this->skillMap)) {
             return null;
         }
 
-        return $this->skillMap[$id];
+        return $this->skillMap[$key];
     }
 
     /**
@@ -99,7 +100,7 @@ class TeraData
         $skills = Reader::createFromPath(base_path('teradata/'.config('tera.skillsDb')));
         $skills->setDelimiter("\t");
         foreach ($skills as $row) {
-            $this->skillMap[(int) $row[0]] = $row;
+            $this->skillMap[strtolower($row[3]).'_'.(int) $row[0]] = $row;
         }
     }
 }
