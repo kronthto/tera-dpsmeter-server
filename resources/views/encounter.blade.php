@@ -6,6 +6,18 @@
     <meta name="dcterms.created" content="{{ $stat->encounter_unix->toIso8601String() }}"/>
 @endsection
 
+<?php
+function generateIco($path, $name)
+{
+    $name = e($name);
+    if ($path) {
+        return '<img class="avatar" src="'.$path.'" alt="'.$name.'" title="'.$name.'"> ';
+    }
+
+    return null;
+}
+?>
+
 @section('content')
     <h1 data-boss-id="{{ $stat->boss_id }}" data-area-id="{{$stat->area_id}}"
         data-when="{{ $stat->encounter_unix }}">{{ $stat->getTitle() }}</h1>
@@ -23,10 +35,14 @@
             </dd>
             @foreach($stat->data->debuffUptime as $debuff)
                 <?php
-                $hotdot = app('tera.data')->getHotdotById((int)$debuff->Key);
+                $hotdot = app('tera.data')->getHotdotById((int) $debuff->Key);
+                $hotdotImg = null;
+                if ($hotdot) {
+                    $hotdotImg = generateIco(app('tera.data')->hotdotIco($hotdot), $hotdot[8]);
+                }
                 ?>
                 <dt data-key="{{ $debuff->Key }}">Debuff
-                    Uptime: {!! $hotdot ? '<abbr title="'.e($hotdot[11]).'">'.e($hotdot[8]).'</abbr>' : e($debuff->Key) !!}</dt>
+                    Uptime: {!! $hotdot ? $hotdotImg.'<abbr title="'.e($hotdot[11]).'">'.e($hotdot[8]).'</abbr>' : e($debuff->Key) !!}</dt>
                 <dd data-value="{{ $debuff->Value }}">{{ $debuff->Value }} {{ $hotdot ? $hotdot[4] : null }}</dd>
             @endforeach
         </dl>
@@ -80,10 +96,14 @@
                     <tbody>
                     @foreach($member->skillLog as $skill)
                         <?php
-                        $skillDb = app('tera.data')->getSkillById((int)$skill->skillId, $member->playerClass);
+                        $skillDb = app('tera.data')->getSkillById((int) $skill->skillId, $member->playerClass);
+                        $skillImg = null;
+                        if ($skillDb) {
+                            $skillImg = generateIco(app('tera.data')->skillIco($skillDb), $skillDb[4]);
+                        }
                         ?>
                         <tr>
-                            <td data-id="{{ $skill->skillId }}">{{ $skillDb ? $skillDb[4] : $skill->skillId }}</td>
+                            <td data-id="{{ $skill->skillId }}">{!! $skillDb ? $skillImg.e($skillDb[4]) : $skill->skillId !!}</td>
                             <td>{{ $skill->skillHits }}</td>
                             <td>{{ $skill->skillCritRate }}</td>
                             <td>{{ $skill->skillDamagePercent }}</td>
@@ -106,10 +126,14 @@
                     <tbody>
                     @foreach($member->buffUptime as $buff)
                         <?php
-                        $hotdot = app('tera.data')->getHotdotById((int)$buff->Key);
+                        $hotdot = app('tera.data')->getHotdotById((int) $buff->Key);
+                        $hotdotImg = null;
+                        if ($hotdot) {
+                            $hotdotImg = generateIco(app('tera.data')->hotdotIco($hotdot), $hotdot[8]);
+                        }
                         ?>
                         <tr>
-                            <td data-key="{{ $buff->Key }}">{!! $hotdot ? '<abbr title="'.e($hotdot[11]).'">'.e($hotdot[8]).'</abbr>' : e($buff->Key) !!}</td>
+                            <td data-key="{{ $buff->Key }}">{!! $hotdot ? $hotdotImg.'<abbr title="'.e($hotdot[11]).'">'.e($hotdot[8]).'</abbr>' : e($buff->Key) !!}</td>
                             <td data-value="{{ $buff->Value }}">{{ $buff->Value }} {{ $hotdot ? $hotdot[4] : null }}</td>
                         </tr>
                     @endforeach

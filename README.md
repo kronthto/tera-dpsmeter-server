@@ -14,6 +14,7 @@ Developed using [ShinraMeter](https://github.com/neowutran/ShinraMeter) as DPS-M
 * Encounter detail page
 * Define list of "allowed" regions in config
 * Dynamic Filter: Stats since, playerName, guild
+* Skill/Buff Icons
 
 ## Endpoints
 
@@ -30,6 +31,7 @@ Developed using [ShinraMeter](https://github.com/neowutran/ShinraMeter) as DPS-M
 $ composer install (--no-dev -o)
 $ cp .env.example .env
 $ ./artisan key:generate
+$ mkdir public/img/icons && unzip teradata/icons.zip -d public/img/icons/
 ```
 Adjust *.env* to your environment (database).
 ``` bash

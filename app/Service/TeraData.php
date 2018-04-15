@@ -70,13 +70,42 @@ class TeraData
             $data->skillMap = $this->skillMap;
 
             \Cache::put('teradata', $data, 180);
-
         } else {
             $this->zoneMap = $data->zoneMap;
             $this->monsterMap = $data->monsterMap;
             $this->hotdotMap = $data->hotdotMap;
             $this->skillMap = $data->skillMap;
         }
+    }
+
+    public function ico($ico)
+    {
+        if (empty(trim($ico))) {
+            return null;
+        }
+        $imgs = glob(public_path('img/icons/'.$ico.'*'));
+        if (empty($imgs)) {
+            return null;
+        }
+
+        return asset(str_replace(public_path(), '', reset($imgs)));
+    }
+
+    public function hotdotIco($hotdot)
+    {
+        if ($hotdot[13]) {
+            $ico = $this->ico($hotdot[13]);
+            if ($ico) {
+                return $ico;
+            }
+        }
+
+        return $this->ico($hotdot[12]);
+    }
+
+    public function skillIco($skill)
+    {
+        return $this->ico($skill[7]);
     }
 
     protected function loadData()
