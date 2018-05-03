@@ -32,25 +32,28 @@ class StatService
     {
         $stats = Stat::query()
             ->where('encounter_unix', '>=', $since->getTimestamp())
-            ->latest()
-            ->get();
+            ->latest();
 
-        return $stats->filter(function (Stat $stat) use ($params) {
+        $resultStats = new Collection();
+
+        $stats->each(function (Stat $stat) use ($params, &$resultStats) {
             $members = $stat->data->members;
 
             if (isset($params['guild']) && empty(array_intersect($params['guild'], array_pluck($members, 'guild')))) {
-                return false;
+                return;
             }
 
             if (isset($params['name']) && empty(array_intersect(
                 $params['name'],
                 array_pluck($members, 'playerName')
             ))) {
-                return false;
+                return;
             }
 
-            return true;
-        });
+            $resultStats->push($stat);
+        }, 400);
+
+        return $resultStats;
     }
 
     public function getLatest()
@@ -62,8 +65,7 @@ class StatService
     {
         if (null === $stats) {
             $stats = Stat::query()
-                ->where('encounter_unix', '>=', $since->getTimestamp())
-                ->get();
+                ->where('encounter_unix', '>=', $since->getTimestamp());
         }
 
         $byBoss = [];
