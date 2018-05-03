@@ -81,7 +81,7 @@ class StatService
                     continue;
                 }
 
-                $member->stat = $stat;
+                $member->stat = &$stat;
                 $byBoss[$key][] = $member;
             }
         });
