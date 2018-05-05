@@ -60,7 +60,7 @@ class Stat extends Model
 
     public function toString()
     {
-        return $this->getMonsterName().' at '.$this->encounter_unix;
+        return $this->getMonsterName();
     }
 
     public function getTitle()
