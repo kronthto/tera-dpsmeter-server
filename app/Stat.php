@@ -65,7 +65,12 @@ class Stat extends Model
 
     public function getTitle()
     {
-        return 'Encounter: '.$this->toString();
+        return $this->toString().' Encounter';
+    }
+
+    public function getDescription()
+    {
+        return sprintf('%s Fight @ %s Party DPS. Uploaded on %s.', gmdate('i:s', $this->data->fightDuration), static::damageFormat($this->data->partyDps), $this->encounter_unix->format('F jS'));
     }
 
     /**

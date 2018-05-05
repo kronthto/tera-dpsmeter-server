@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'Home')
-
 @section('content')
     <h1><abbr title="The Exiled Realm of Arborea">TERA</abbr> DPS Stats</h1>
     <style>

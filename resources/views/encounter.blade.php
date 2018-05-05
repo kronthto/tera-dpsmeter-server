@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
-@section('title', $stat->getTitle())
+@section('title', $stat->getTitle(). ' - TERA DPS')
 
 @section('meta')
     <meta name="dcterms.created" content="{{ $stat->encounter_unix->toIso8601String() }}"/>
+    <meta name="description" content="{{ $stat->getDescription() }}" />
 @endsection
 
 <?php
