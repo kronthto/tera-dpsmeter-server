@@ -60,7 +60,9 @@ function generateIco($path, $name)
         <details class="accordion">
             <summary class="accordion-header">
                 <h3>
-                    <i class="icon icon-arrow-right mr-1"></i> <abbr data-guild="{{ $member->guild ?? '' }}"
+                    <i class="icon icon-arrow-right mr-1"></i>
+                    {!! \App\Service\TeraData::classIconHtml($member) !!}
+                    <abbr data-guild="{{ $member->guild ?? '' }}"
                                                                      data-name="{{ $member->playerName }}"
                                                                      data-class="{{ $member->playerClass }}"
                                                                      data-server="{{ $member->playerServer }}"

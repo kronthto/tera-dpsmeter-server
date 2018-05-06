@@ -78,6 +78,12 @@ class TeraData
         }
     }
 
+    public static function classIconHtml($member): string
+    {
+        $class = $member->playerClass;
+        return '<img class="avatar" alt="'.e($class).'" title="'.e($class).'" src="'.asset('/img/class-icons/'.e(strtolower($class))).'.png">';
+    }
+
     public function ico($ico)
     {
         if (empty(trim($ico))) {

@@ -41,6 +41,7 @@
                 <ol>
                     @foreach(array_slice($boss, 0, 5) as $member)
                         <li data-when="{{ $member->stat->encounter_unix }}">
+                            {!! \App\Service\TeraData::classIconHtml($member) !!}
                             <abbr data-guild="{{ $member->guild ?? '' }}" data-name="{{ $member->playerName }}"
                                   data-class="{{ $member->playerClass }}" data-server="{{ $member->playerServer }}"
                                   title="{{ $member->playerClass }} of {{ $member->guild ?? '-' }}, {{ $member->playerServer }}">{{ $member->playerName }}</abbr>
