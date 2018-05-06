@@ -5,6 +5,12 @@
 @section('meta')
     <meta name="dcterms.created" content="{{ $stat->encounter_unix->toIso8601String() }}"/>
     <meta name="description" content="{{ $stat->getDescription() }}" />
+
+    <meta property="og:title" content="{{ $stat->getTitle() }}" />
+    <meta property="og:site_name" content="TERA DPS Server" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ route('statDetail', $stat ) }}" />
+    <meta property="og:description" content="{{ $stat->getDescription() }}" />
 @endsection
 
 <?php
