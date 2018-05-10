@@ -46,7 +46,11 @@
                                   data-class="{{ $member->playerClass }}" data-server="{{ $member->playerServer }}"
                                   title="{{ $member->playerClass }} of {{ $member->guild ?? '-' }}, {{ $member->playerServer }}">{{ $member->playerName }}</abbr>
                             - <abbr title="{{ $member->playerDps }}">{{ \App\Stat::damageFormat($member->playerDps) }}</abbr>/s (<a
+                                    class="tooltip" data-tooltip="{{ $encounter->encounter_unix }}"
                                     href="{{ route('statDetail', $member->stat ) }}" title="{{ $encounter->getTitle() }} at {{ $encounter->encounter_unix }}">#</a>)
+                            @if($encounter->encounter_unix->diffInDays() <= config('tera.recentDays'))
+                                <i class="tooltip" data-tooltip="{{ $encounter->encounter_unix->diffForHumans() }}">⚡</i>
+                            @endif
                         </li>
                     @endforeach
                 </ol>
