@@ -33,6 +33,16 @@
     </style>
     <section>
     <h2>Recent Best DPS by Boss</h2>
+            @foreach($recentEvents as $recentMember)
+                {{-- enrich with data- attrs --}}
+            <a class="toast toast-primary" href="{{ route('statDetail', $recentMember->stat ) }}" title="{{ $recentMember->stat->getTitle() }} at {{ $recentMember->stat->encounter_unix }}">🎉
+                <abbr data-guild="{{ $recentMember->guild ?? '' }}" data-name="{{ $recentMember->playerName }}"
+                      data-class="{{ $recentMember->playerClass }}" data-server="{{ $recentMember->playerServer }}"
+                      title="{{ $recentMember->playerClass }} of {{ $recentMember->guild ?? '-' }}, {{ $recentMember->playerServer }}">{{ $recentMember->playerName }}</abbr>
+                placed <b>#{{ $recentMember->rank }}</b> at {{ $recentMember->stat->toString() }} <abbr title="{{ $recentMember->stat->encounter_unix }}">{{ $recentMember->stat->encounter_unix->diffForHumans() }}</abbr>
+                🎉</a>
+            @endforeach
+        <br>
     <div class="columnList">
         @foreach($byBoss as $boss)
             <?php $encounter = reset($boss)->stat; ?>
@@ -48,7 +58,7 @@
                             - <abbr title="{{ $member->playerDps }}">{{ \App\Stat::damageFormat($member->playerDps) }}</abbr>/s (<a
                                     class="tooltip" data-tooltip="{{ $encounter->encounter_unix }}"
                                     href="{{ route('statDetail', $member->stat ) }}" title="{{ $encounter->getTitle() }} at {{ $encounter->encounter_unix }}">#</a>)
-                            @if($encounter->encounter_unix->diffInDays() <= config('tera.recentDays'))
+                            @if($encounter->isRecent())
                                 <i class="tooltip" data-tooltip="{{ $encounter->encounter_unix->diffForHumans() }}">⚡</i>
                             @endif
                         </li>

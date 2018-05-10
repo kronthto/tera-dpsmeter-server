@@ -32,10 +32,22 @@ Route::get('/', function (\Illuminate\Http\Request $request) {
     }
     // Can we improve performance / memory management by returning a Generator with stats from getRawStatsByParams? Problem is, how to build a generator from inside the chunk lambdas.
 
+    $byBoss = $service->getByBossSince($statsSince, $stats, $params);
+    $recentEvents = [];
+    foreach ($byBoss as $key => $boss) {
+        foreach (array_slice($boss, 0, 10) as $i => $member) { // TODO: Move to conf/const
+            if ($member->stat->isRecent()) {
+                $member->rank = $i + 1;
+                $recentEvents[] = $member;
+            }
+        }
+    }
+
     return view('index', [
         'encounters' => null !== $stats ? $stats->slice(0, 50) : $service->getLatest(),
-        'byBoss' => $service->getByBossSince($statsSince, $stats, $params),
+        'byBoss' => $byBoss,
         'statsSince' => $statsSince,
+        'recentEvents' => $recentEvents,
     ]);
 });
 

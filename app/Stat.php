@@ -68,6 +68,11 @@ class Stat extends Model
         return $this->toString().' Encounter';
     }
 
+    public function isRecent()
+    {
+        return $this->encounter_unix->diffInDays() <= config('tera.recentDays');
+    }
+
     public function getDescription()
     {
         return sprintf('%s Fight @ %s Party DPS. Uploaded on %s.', gmdate('i:s', $this->data->fightDuration), static::damageFormat($this->data->partyDps), $this->encounter_unix->format('F jS'));
