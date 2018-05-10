@@ -46,7 +46,7 @@
                                   data-class="{{ $member->playerClass }}" data-server="{{ $member->playerServer }}"
                                   title="{{ $member->playerClass }} of {{ $member->guild ?? '-' }}, {{ $member->playerServer }}">{{ $member->playerName }}</abbr>
                             - <abbr title="{{ $member->playerDps }}">{{ \App\Stat::damageFormat($member->playerDps) }}</abbr>/s (<a
-                                    href="{{ route('statDetail', $member->stat ) }}" title="{{ $encounter->getTitle() }}">#</a>)
+                                    href="{{ route('statDetail', $member->stat ) }}" title="{{ $encounter->getTitle() }} at {{ $encounter->encounter_unix }}">#</a>)
                         </li>
                     @endforeach
                 </ol>
@@ -75,7 +75,7 @@
                 <td data-boss-id="{{ $encounter->boss_id }}" data-area-id="{{ $encounter->area_id }}">{{ $encounter->getMonsterName() }} - {{ $encounter->getAreaName() }}</td>
                 <td>{{ gmdate('i:s', $encounter->data->fightDuration) }}</td>
                 <td><abbr title="{{ $encounter->data->partyDps }}">{{ \App\Stat::damageFormat($encounter->data->partyDps)  }}</abbr></td>
-                <td><a href="{{ route('statDetail', $encounter) }}" title="{{ $encounter->getTitle() }}">Detail</a> <a href="{{ route('getStat', $encounter) }}" target="_blank" title="JSON-Data: {{ $encounter->getTitle() }}">Raw</a></td>
+                <td><a href="{{ route('statDetail', $encounter) }}" title="{{ $encounter->getTitle() }} at {{ $encounter->encounter_unix }}">Detail</a> <a href="{{ route('getStat', $encounter) }}" target="_blank" title="JSON-Data: {{ $encounter->getTitle() }} at {{ $encounter->encounter_unix }}">Raw</a></td>
             </tr>
         @endforeach
         </tbody>

@@ -29,7 +29,7 @@ function generateIco($path, $name)
     <h1 data-boss-id="{{ $stat->boss_id }}" data-area-id="{{$stat->area_id}}"
         data-when="{{ $stat->encounter_unix }}">{{ $stat->toString() }} at {{ $stat->encounter_unix }}</h1>
     <span data-area-id="{{$stat->area_id}}">{{ $stat->getAreaName() }}</span><br>
-    <small><a href="{{ route('getStat', $stat) }}" target="_blank" title="JSON-Data: {{ $stat->getTitle() }}">Raw</a>
+    <small><a href="{{ route('getStat', $stat) }}" target="_blank" title="JSON-Data: {{ $stat->getTitle() }} at {{ $stat->encounter_unix }}">Raw</a>
     </small>
 
     <section>
