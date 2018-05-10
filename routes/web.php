@@ -35,7 +35,7 @@ Route::get('/', function (\Illuminate\Http\Request $request) {
     $byBoss = $service->getByBossSince($statsSince, $stats, $params);
     $recentEvents = [];
     foreach ($byBoss as $key => $boss) {
-        foreach (array_slice($boss, 0, 10) as $i => $member) { // TODO: Move to conf/const
+        foreach (array_slice($boss, 0, 5) as $i => $member) { // TODO: Move to conf/const
             if ($member->stat->isRecent()) {
                 $member->rank = $i + 1;
                 $recentEvents[] = $member;
