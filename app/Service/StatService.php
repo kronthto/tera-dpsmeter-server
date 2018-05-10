@@ -37,7 +37,7 @@ class StatService
         $resultStats = new Collection();
 
         $stats->each(function (Stat $stat) use ($params, &$resultStats) {
-            $members = $stat->data->members;
+            $members = &$stat->data->members;
 
             if (isset($params['guild']) && empty(array_intersect($params['guild'], array_pluck($members, 'guild')))) {
                 return;
@@ -61,8 +61,12 @@ class StatService
         return Stat::getLatestPaginator();
     }
 
-    public function getByBossSince(\DateTimeInterface $since, Collection $stats = null, array $params = [])
-    {
+    public function getByBossSince(
+        \DateTimeInterface $since,
+        Collection $stats = null,
+        array $params = [],
+        $byBossThreshold = 20
+    ) {
         if (null === $stats) {
             $stats = Stat::query()
                 ->where('encounter_unix', '>=', $since->getTimestamp());
@@ -70,9 +74,12 @@ class StatService
 
         $byBoss = [];
 
-        $stats->each(function (Stat $stat) use (&$byBoss, $params) {
+        $stats->each(function (Stat $stat) use (&$byBoss, $params, $byBossThreshold) {
             $key = $stat->area_id.'_'.$stat->boss_id;
             foreach ($stat->data->members as $member) {
+                // Performance
+                unset($member->buffDetail, $member->buffUptime, $member->skillLog, $member->skillCasts);
+
                 if (isset($params['guild']) && !\in_array($member->guild ?? null, $params['guild'], true)) {
                     continue;
                 }
@@ -83,16 +90,27 @@ class StatService
 
                 $member->stat = &$stat;
                 $byBoss[$key][] = $member;
+
+                // Performance: Eliminate those that are certainly out to save memory - Final sorting/slicing is done later
+                if (\count($byBoss[$key]) >= $byBossThreshold * 2) {
+                    $byBoss[$key] = $this->sortUniqueLimitByBoss($byBoss[$key], $byBossThreshold);
+                }
             }
         });
 
-        foreach ($byBoss as $key => $boss) {
-            usort($boss, function ($a, $b) {
-                return $b->playerDps - $a->playerDps;
-            });
-            $byBoss[$key] = collect($boss)->unique('playerName')->toArray();
+        foreach ($byBoss as $key => &$boss) {
+            $byBoss[$key] = $this->sortUniqueLimitByBoss($boss, $byBossThreshold);
         }
 
         return $byBoss;
+    }
+
+    protected function sortUniqueLimitByBoss(array &$boss, $byBossThreshold)
+    {
+        usort($boss, function ($a, $b) {
+            return $b->playerDps - $a->playerDps;
+        });
+
+        return collect($boss)->unique('playerName')->slice(0, $byBossThreshold)->toArray();
     }
 }

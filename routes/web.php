@@ -30,6 +30,7 @@ Route::get('/', function (\Illuminate\Http\Request $request) {
     if (!empty($params)) {
         $stats = $service->getRawStatsByParams($params, $statsSince);
     }
+    // Can we improve performance / memory management by returning a Generator with stats from getRawStatsByParams? Problem is, how to build a generator from inside the chunk lambdas.
 
     return view('index', [
         'encounters' => null !== $stats ? $stats->slice(0, 50) : $service->getLatest(),
