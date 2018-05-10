@@ -21,7 +21,7 @@ Route::get('/', function (\Illuminate\Http\Request $request) {
             return response('Invalid date format', 400);
         }
     } else {
-        $statsSince = \Carbon\Carbon::now()->subWeeks(1)->startOfDay();
+        $statsSince = \Carbon\Carbon::now()->subDays(10)->startOfDay();
     }
 
     $service = app(\App\Service\StatService::class);
