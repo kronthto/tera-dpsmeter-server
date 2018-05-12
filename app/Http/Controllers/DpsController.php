@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDpsData;
 use App\Stat;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class DpsController extends Controller
@@ -47,5 +48,44 @@ class DpsController extends Controller
         return response()->json(array_map(function ($regionId) {
             return ['AreaId' => $regionId, 'BossIds' => []];
         }, config('tera.allowedRegions')));
+    }
+
+    public function overviewPage(Request $request)
+    {
+        if ($request->has('since')) {
+            try {
+                $statsSince = new \Carbon\Carbon($request->get('since'));
+            } catch (\Exception $e) {
+                return response('Invalid date format', 400);
+            }
+        } else {
+            $statsSince = \Carbon\Carbon::now()->subDays(10)->startOfDay();
+        }
+
+        $service = app(\App\Service\StatService::class);
+        $params = $service->parseParams($request);
+        $stats = null;
+        if (!empty($params)) {
+            $stats = $service->getRawStatsByParams($params, $statsSince);
+        }
+        // Can we improve performance / memory management by returning a Generator with stats from getRawStatsByParams? Problem is, how to build a generator from inside the chunk lambdas.
+
+        $byBoss = $service->getByBossSince($statsSince, $stats, $params);
+        $recentEvents = [];
+        foreach ($byBoss as $key => $boss) {
+            foreach (\array_slice($boss, 0, 5) as $i => $member) { // TODO: Move to conf/const
+                if ($member->stat->isRecent()) {
+                    $member->rank = $i + 1;
+                    $recentEvents[] = $member;
+                }
+            }
+        }
+
+        return view('index', [
+            'encounters' => null !== $stats ? $stats->slice(0, 50) : $service->getLatest(),
+            'byBoss' => $byBoss,
+            'statsSince' => $statsSince,
+            'recentEvents' => $recentEvents,
+        ]);
     }
 }
