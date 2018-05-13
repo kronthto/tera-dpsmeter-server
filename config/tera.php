@@ -26,5 +26,9 @@ return [
         911, // Kelsaik's Raid (10-Person)
         975, // Kelsaik's Raid (20-Person)
     ],
+    'allowedRegionsBosses' => [
+        622 => [1000], // Dreadreaper Guardian
+        620 => [1000], // Vehemos Guardian
+    ],
     'recentDays' => 3,
 ];

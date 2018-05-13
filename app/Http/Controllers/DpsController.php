@@ -45,9 +45,14 @@ class DpsController extends Controller
 
     public function allowedInfo()
     {
-        return response()->json(array_map(function ($regionId) {
+        $allowed = array_map(function ($regionId) {
             return ['AreaId' => $regionId, 'BossIds' => []];
-        }, config('tera.allowedRegions')));
+        }, config('tera.allowedRegions'));
+        foreach (config('tera.allowedRegionsBosses') as $AreaId => $BossIds) {
+            $allowed[] = compact('AreaId', 'BossIds');
+        }
+
+        return response()->json($allowed);
     }
 
     public function overviewPage(Request $request)
