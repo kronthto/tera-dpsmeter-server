@@ -72,7 +72,7 @@ class DpsController extends Controller
 
         $byBoss = $service->getByBossSince($statsSince, $stats, $params);
         $recentEvents = [];
-        foreach ($byBoss as $key => $boss) {
+        foreach ($byBoss as $boss) {
             foreach (\array_slice($boss, 0, 5) as $i => $member) { // TODO: Move to conf/const
                 if ($member->stat->isRecent()) {
                     $member->rank = $i + 1;
@@ -81,9 +81,21 @@ class DpsController extends Controller
             }
         }
 
+        $byMap = [];
+        foreach ($byBoss as $key => $boss) {
+            $mapBossSplit = explode('_', $key);
+            $byMap[$mapBossSplit[0]][$mapBossSplit[1]] = $boss;
+        }
+
+        // Map Sort?
+        foreach ($byMap as &$map) {
+            ksort($map);
+        }
+
         return view('index', [
             'encounters' => null !== $stats ? $stats->slice(0, 50) : $service->getLatest(),
             'byBoss' => $byBoss,
+            'byMap' => $byMap,
             'statsSince' => $statsSince,
             'recentEvents' => $recentEvents,
         ]);

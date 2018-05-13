@@ -2,37 +2,8 @@
 
 @section('content')
     <h1><abbr title="The Exiled Realm of Arborea">TERA</abbr> DPS Stats</h1>
-    <style>
-        .dpsCard {
-            break-inside: avoid-column;
-            text-align: left;
-        }
-
-        .columnList {
-            column-count: 4;
-            column-gap: 20px;
-        }
-
-        @media (max-width: 1100px) {
-            .columnList {
-                column-count: 3;
-            }
-        }
-
-        @media (max-width: 800px) {
-            .columnList {
-                column-count: 2;
-            }
-        }
-
-        @media (max-width: 460px) {
-            .columnList {
-                column-count: 1;
-            }
-        }
-    </style>
     <section>
-    <h2>Recent Best DPS by Boss</h2>
+    <h2>Recent Best DPS by Dungeon/Boss</h2>
             @foreach($recentEvents as $recentMember)
                 {{-- enrich with data- attrs --}}
             <a class="toast toast-primary" href="{{ route('statDetail', $recentMember->stat ) }}" title="{{ $recentMember->stat->getTitle() }} at {{ $recentMember->stat->encounter_unix }}">🎉
@@ -43,31 +14,42 @@
                 🎉</a>
             @endforeach
         <br>
-    <div class="columnList">
-        @foreach($byBoss as $boss)
-            <?php $encounter = reset($boss)->stat; ?>
-            <div class="dpsCard" data-boss-id="{{ $encounter->boss_id }}" data-area-id="{{ $encounter->area_id }}">
-                <h3>{{ $encounter->getMonsterName() }} - {{ $encounter->getAreaName() }}</h3>
-                <ol>
-                    @foreach(array_slice($boss, 0, 5) as $member)
-                        <li data-when="{{ $member->stat->encounter_unix }}">
-                            {!! \App\Service\TeraData::classIconHtml($member) !!}
-                            <abbr data-guild="{{ $member->guild ?? '' }}" data-name="{{ $member->playerName }}"
-                                  data-class="{{ $member->playerClass }}" data-server="{{ $member->playerServer }}"
-                                  title="{{ $member->playerClass }} of {{ $member->guild ?? '-' }}, {{ $member->playerServer }}">{{ $member->playerName }}</abbr>
-                            - <abbr title="{{ $member->playerDps }}">{{ \App\Stat::damageFormat($member->playerDps) }}</abbr>/s (<a
-                                    class="tooltip" data-tooltip="{{ $member->stat->encounter_unix }}"
-                                    href="{{ route('statDetail', $member->stat ) }}" title="{{ $member->stat->getTitle() }} at {{ $member->stat->encounter_unix }}">#</a>)
-                            @if($member->stat->isRecent())
-                                <i class="tooltip" data-tooltip="{{ $member->stat->encounter_unix->diffForHumans() }}">⚡</i>
-                            @endif
-                        </li>
-                    @endforeach
-                </ol>
-            </div>
-        @endforeach
-    </div>
-    <span>Checked stats since {{ $statsSince->toFormattedDateString() }}</span>
+        <div>
+            @foreach($byMap as $mapId => $mapData)
+                <div class="accordion" data-area-id="{{ $mapId }}">
+                    <input type="checkbox" id="accordion-radio-map-{{ $mapId }}" hidden>
+                    <label class="accordion-header" for="accordion-radio-map-{{ $mapId }}" style="cursor: pointer">
+                        <i class="icon icon-arrow-right mr-1"></i> {{ app(\App\Service\TeraData::class)->getAreaNameById($mapId) }}
+                    </label>
+                    <div class="accordion-body container">
+                        <div class="columns">
+                        @foreach($mapData as $bossId => $boss)
+                            <div class="column" data-boss-id="{{ $bossId }}" data-area-id="{{ $mapId }}">
+                                <h3>{{ app(\App\Service\TeraData::class)->getMonsterNameByAreaAndId($mapId, $bossId) }}</h3>
+                                <ol>
+                                    @foreach(array_slice($boss, 0, 5) as $member)
+                                        <li data-when="{{ $member->stat->encounter_unix }}">
+                                            {!! \App\Service\TeraData::classIconHtml($member) !!}
+                                            <abbr data-guild="{{ $member->guild ?? '' }}" data-name="{{ $member->playerName }}"
+                                                  data-class="{{ $member->playerClass }}" data-server="{{ $member->playerServer }}"
+                                                  title="{{ $member->playerClass }} of {{ $member->guild ?? '-' }}, {{ $member->playerServer }}">{{ $member->playerName }}</abbr>
+                                            - <abbr title="{{ $member->playerDps }}">{{ \App\Stat::damageFormat($member->playerDps) }}</abbr>/s (<a
+                                                    class="tooltip" data-tooltip="{{ $member->stat->encounter_unix }}"
+                                                    href="{{ route('statDetail', $member->stat ) }}" title="{{ $member->stat->getTitle() }} at {{ $member->stat->encounter_unix }}">#</a>)
+                                            @if($member->stat->isRecent())
+                                                <i class="tooltip" data-tooltip="{{ $member->stat->encounter_unix->diffForHumans() }}">⚡</i>
+                                            @endif
+                                        </li>
+                                    @endforeach
+                                </ol>
+                            </div>
+                        @endforeach
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+        </div>
+    <span style="font-size: 80%; font-style: italic;">Checked stats since {{ $statsSince->toFormattedDateString() }}</span>
     </section>
 
     <section>
