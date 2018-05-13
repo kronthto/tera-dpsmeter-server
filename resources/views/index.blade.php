@@ -19,13 +19,13 @@
                 <div class="accordion" data-area-id="{{ $mapId }}">
                     <input type="checkbox" id="accordion-radio-map-{{ $mapId }}" hidden>
                     <label class="accordion-header" for="accordion-radio-map-{{ $mapId }}" style="cursor: pointer">
-                        <i class="icon icon-arrow-right mr-1"></i> {{ app(\App\Service\TeraData::class)->getAreaNameById($mapId) }}
+                        <i class="icon icon-arrow-right mr-1"></i> {{ app('tera.data')->getAreaNameById($mapId) }}
                     </label>
                     <div class="accordion-body container">
                         <div class="columns">
                         @foreach($mapData as $bossId => $boss)
                             <div class="column" data-boss-id="{{ $bossId }}" data-area-id="{{ $mapId }}">
-                                <h3>{{ app(\App\Service\TeraData::class)->getMonsterNameByAreaAndId($mapId, $bossId) }}</h3>
+                                <h3>{{ app('tera.data')->getMonsterNameByAreaAndId($mapId, $bossId) }}</h3>
                                 <ol>
                                     @foreach(array_slice($boss, 0, 5) as $member)
                                         <li data-when="{{ $member->stat->encounter_unix }}">

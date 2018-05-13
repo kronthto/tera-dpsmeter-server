@@ -82,7 +82,7 @@ class DpsController extends Controller
         }
 
         $byMap = [];
-        foreach ($byBoss as $key => $boss) {
+        foreach ($byBoss as $key => &$boss) {
             $mapBossSplit = explode('_', $key);
             $byMap[$mapBossSplit[0]][$mapBossSplit[1]] = $boss;
         }
@@ -94,7 +94,7 @@ class DpsController extends Controller
 
         return view('index', [
             'encounters' => null !== $stats ? $stats->slice(0, 50) : $service->getLatest(),
-            'byBoss' => $byBoss,
+            // 'byBoss' => $byBoss,
             'byMap' => $byMap,
             'statsSince' => $statsSince,
             'recentEvents' => $recentEvents,
