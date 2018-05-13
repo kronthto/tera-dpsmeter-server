@@ -13,8 +13,9 @@ Developed using [ShinraMeter](https://github.com/neowutran/ShinraMeter) as DPS-M
 * Show Top-DPS by boss of recent time period
 * Encounter detail page
 * Define list of "allowed" regions in config
-* Dynamic Filter: Stats since, playerName, guild
+* Dynamic Filter via GET-Params: `since`, `playerName`, `guild`
 * Skill/Buff/Class Icons
+* Recent Events feed: Players taking high positions in ByBoss rankings
 
 ## Endpoints
 
