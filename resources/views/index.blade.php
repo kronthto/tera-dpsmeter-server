@@ -24,7 +24,7 @@
                     <div class="accordion-body container">
                         <div class="columns">
                         @foreach($mapData as $bossId => $boss)
-                            <div class="column" data-boss-id="{{ $bossId }}" data-area-id="{{ $mapId }}">
+                            <div class="column col-sm-6 col-xs-12" data-boss-id="{{ $bossId }}" data-area-id="{{ $mapId }}">
                                 <h3>{{ app('tera.data')->getMonsterNameByAreaAndId($mapId, $bossId) }}</h3>
                                 <ol>
                                     @foreach(array_slice($boss, 0, 5) as $member)
