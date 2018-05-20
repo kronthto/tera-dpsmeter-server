@@ -8,7 +8,7 @@
     <title>@yield('title', 'TERA DPS Server')</title>
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css" crossorigin="anonymous">
-    <link href="{{ asset('css/app.css?v=2018040100') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/app.css?v=2018051300') }}" rel="stylesheet" type="text/css">
     <!--[if IE]>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" crossorigin="anonymous">
     <![endif]-->

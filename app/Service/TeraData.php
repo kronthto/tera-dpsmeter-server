@@ -131,8 +131,8 @@ class TeraData
         foreach ($hotdot as $row) {
             $this->hotdotMap[(int) $row[0]] = $row;
         }
-        $this->hotdotMap[8888888] = [0 => 8888888, 8 => 'Enraged', 13 => 'enraged', 11 => null, 4 => null];
-        $this->hotdotMap[8888889] = [0 => 8888889, 8 => 'Slaying', 13 => 'slaying', 11 => null, 4 => null];
+        $this->hotdotMap[8888888] = [0 => 8888888, 8 => 'Enraged', 13 => 'enraged', 11 => null, 4 => null, 1 => null, 2 => null];
+        $this->hotdotMap[8888889] = [0 => 8888889, 8 => 'Slaying', 13 => 'slaying', 11 => null, 4 => null, 1 => null, 2 => null];
 
         $skills = Reader::createFromPath(base_path('teradata/'.config('tera.skillsDb')));
         $skills->setDelimiter("\t");

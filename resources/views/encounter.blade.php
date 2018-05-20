@@ -13,18 +13,6 @@
     <meta property="og:description" content="{{ $stat->getDescription() }}" />
 @endsection
 
-<?php
-function generateIco($path, $name)
-{
-    $name = e($name);
-    if ($path) {
-        return '<img class="avatar" src="'.$path.'" alt="'.$name.'" title="'.$name.'"> ';
-    }
-
-    return null;
-}
-?>
-
 @section('content')
     <h1 data-boss-id="{{ $stat->boss_id }}" data-area-id="{{$stat->area_id}}"
         data-when="{{ $stat->encounter_unix }}">{{ $stat->toString() }} at {{ $stat->encounter_unix }}</h1>
@@ -43,13 +31,10 @@ function generateIco($path, $name)
             @foreach($stat->data->debuffUptime as $debuff)
                 <?php
                 $hotdot = app('tera.data')->getHotdotById((int) $debuff->Key);
-                $hotdotImg = null;
-                if ($hotdot) {
-                    $hotdotImg = generateIco(app('tera.data')->hotdotIco($hotdot), $hotdot[8]);
-                }
                 ?>
                 <dt data-key="{{ $debuff->Key }}">Debuff
-                    Uptime: {!! $hotdot ? $hotdotImg.'<abbr title="'.e($hotdot[11]).'">'.e($hotdot[8]).'</abbr>' : e($debuff->Key) !!}</dt>
+                    Uptime: @include('hotdot_def', ['hotdotId' => $debuff->Key])
+                </dt>
                 <dd data-value="{{ $debuff->Value }}">{{ $debuff->Value }} {{ $hotdot ? $hotdot[4] : null }}</dd>
             @endforeach
         </dl>
@@ -108,7 +93,7 @@ function generateIco($path, $name)
                         $skillDb = app('tera.data')->getSkillById((int) $skill->skillId, $member->playerClass);
                         $skillImg = null;
                         if ($skillDb) {
-                            $skillImg = generateIco(app('tera.data')->skillIco($skillDb), $skillDb[4]);
+                            $skillImg = \App\Service\ViewHelpers::generateIco(app('tera.data')->skillIco($skillDb), $skillDb[4]);
                         }
                         ?>
                         <tr>
@@ -136,13 +121,11 @@ function generateIco($path, $name)
                     @foreach($member->buffUptime as $buff)
                         <?php
                         $hotdot = app('tera.data')->getHotdotById((int) $buff->Key);
-                        $hotdotImg = null;
-                        if ($hotdot) {
-                            $hotdotImg = generateIco(app('tera.data')->hotdotIco($hotdot), $hotdot[8]);
-                        }
                         ?>
                         <tr>
-                            <td data-key="{{ $buff->Key }}">{!! $hotdot ? $hotdotImg.'<abbr title="'.e($hotdot[11]).'">'.e($hotdot[8]).'</abbr>' : e($buff->Key) !!}</td>
+                            <td data-key="{{ $buff->Key }}">
+                                @include('hotdot_def', ['hotdotId' => $buff->Key])
+                            </td>
                             <td data-value="{{ $buff->Value }}">{{ $buff->Value }} {{ $hotdot ? $hotdot[4] : null }}</td>
                         </tr>
                     @endforeach
