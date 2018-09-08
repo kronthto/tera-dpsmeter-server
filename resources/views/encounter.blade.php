@@ -98,11 +98,13 @@
                         ?>
                         <tr>
                             <td data-id="{{ $skill->skillId }}">{!! $skillDb ? $skillImg.e($skillDb[4]) : $skill->skillId !!}</td>
-                            <td>{{ $skill->skillHits }}</td>
-                            <td>{{ $skill->skillCritRate }}</td>
-                            <td>{{ $skill->skillDamagePercent }}</td>
+                            <td>{{ $skill->skillHits ?? ($skill->skillCasts ?? null) }}</td>
+                            <td>{{ $skill->skillCritRate ?? null }}</td>
+                            <td>{{ $skill->skillDamagePercent ?? null }}</td>
                             <td>
+                                @if(isset($skill->skillHighestCrit))
                                 <abbr title="{{ $skill->skillHighestCrit }}">{{ \App\Stat::damageFormat($skill->skillHighestCrit)  }}</abbr>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
