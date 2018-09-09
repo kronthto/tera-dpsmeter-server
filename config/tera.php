@@ -25,6 +25,10 @@ return [
         713, // Ghillieglade
         911, // Kelsaik's Raid (10-Person)
         975, // Kelsaik's Raid (20-Person)
+        459, // Forsaken Island
+        759, // Forsaken Island Hard
+        739, // Red Refuge
+        939, // Red Refuge Hard
     ],
     'allowedRegionsBosses' => [
         622 => [1000], // Dreadreaper Guardian
