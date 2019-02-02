@@ -29,6 +29,19 @@ return [
         759, // Forsaken Island Hard
         739, // Red Refuge
         939, // Red Refuge Hard
+        780, // Velik's Hold (7-Person)
+        781, // Velik's Sanctuary
+        980, // Velik's Hold (Hard)
+        981, // Velik's Sanctuary (Hard)
+        066, // Demon's Wheel
+        034, // Dreadspire
+        044, // Bahaar's Sanctum
+        783, // Dark Reach Citadel
+        983, // Dark Reach Citadel (Hard)
+        720, // Antaroth's Abyss
+        920, // Antaroth's Abyss (Hard)
+        782, // Grotto of Lost Souls
+        982, // Grotto of Lost Souls (Hard)
     ],
     'allowedRegionsBosses' => [
         622 => [1000], // Dreadreaper Guardian
