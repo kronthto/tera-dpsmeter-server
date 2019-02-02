@@ -33,9 +33,9 @@ return [
         781, // Velik's Sanctuary
         980, // Velik's Hold (Hard)
         981, // Velik's Sanctuary (Hard)
-        066, // Demon's Wheel
-        034, // Dreadspire
-        044, // Bahaar's Sanctum
+        66, // Demon's Wheel
+        34, // Dreadspire
+        44, // Bahaar's Sanctum
         783, // Dark Reach Citadel
         983, // Dark Reach Citadel (Hard)
         720, // Antaroth's Abyss
