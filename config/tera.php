@@ -5,7 +5,7 @@ return [
     'hotdotDb' => env('TERA_HOTDOT', 'hotdot/hotdot-EU-EN.tsv'),
     'skillsDb' => env('TERA_SKILLS', 'skills/skills-EU-EN.tsv'),
     'allowedRegions' => [
-        126, // Pit of Petrax
+        126, // Pit of Petrax / Vault of Flames Classic
         735, // RK-9 Kennel
         935, // RK-9 Kennel (Hard)
         950, // Harrowhold
@@ -42,6 +42,12 @@ return [
         920, // Antaroth's Abyss (Hard)
         782, // Grotto of Lost Souls
         982, // Grotto of Lost Souls (Hard)
+        811, // The Abscess Classic
+        810, // Lakan's Prison Classic
+        50, // Rift's Edge (Hard) Classic
+        750, // Rift's Edge Classic
+        124, // Vault of Seas Classic
+        125, // Vault of Winter Classic
     ],
     'allowedRegionsBosses' => [
         622 => [1000], // Dreadreaper Guardian
