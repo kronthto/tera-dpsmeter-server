@@ -126,6 +126,23 @@ class TeraData
             }
         }
 
+        if (config('tera.monstersDbClassic')) {
+            $data = simplexml_load_file(base_path('teradata/'.config('tera.monstersDbClassic')));
+
+            foreach ($data->Zone as $zone) {
+                $zoneId = (int) $zone->attributes()->id;
+                if (!isset($this->zoneMap[$zoneId])) {
+                    $this->zoneMap[$zoneId] = (string) $zone->attributes()->name;
+                }
+                foreach ($zone->Monster as $monster) {
+                    $monsterId = (int) $monster->attributes()->id;
+                    if (!isset($this->monsterMap[$zoneId][$monsterId])) {
+                        $this->monsterMap[$zoneId][$monsterId] = (string) $monster->attributes()->name;
+                    }
+                }
+            }
+        }
+
         $hotdot = Reader::createFromPath(base_path('teradata/'.config('tera.hotdotDb')));
         $hotdot->setDelimiter("\t");
         foreach ($hotdot as $row) {

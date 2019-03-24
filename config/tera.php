@@ -2,6 +2,7 @@
 
 return [
     'monstersDb' => env('TERA_MONSTERS', 'monsters/monsters-EU-EN.xml'),
+    'monstersDbClassic' => env('TERA_CL_MONSTERS', 'monsters/monsters-EUC-EN.xml'),
     'hotdotDb' => env('TERA_HOTDOT', 'hotdot/hotdot-EU-EN.tsv'),
     'skillsDb' => env('TERA_SKILLS', 'skills/skills-EU-EN.tsv'),
     'allowedRegions' => [
