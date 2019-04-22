@@ -49,6 +49,8 @@ return [
         750, // Rift's Edge Classic
         124, // Vault of Seas Classic
         125, // Vault of Winter Classic
+        68, // Shadow Sanguinary (Hard)
+        768, // Shadow Sanguinary
     ],
     'allowedRegionsBosses' => [
         622 => [1000], // Dreadreaper Guardian
