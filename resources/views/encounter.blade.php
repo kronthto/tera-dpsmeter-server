@@ -81,6 +81,9 @@
                     <dd>{{ $member->playerTotalDamagePercentage }}</dd>
                 </dl>
 
+                <div class="columns">
+                    <div class="column col-6">
+
                 <h4>Skills</h4>
                 <table class="table table-striped">
                     <thead>
@@ -116,6 +119,8 @@
                     </tbody>
                 </table>
 
+                </div> <div class="column col-6">
+
                 <h4>Buffs Uptime</h4>
                 <table class="table table-striped">
                     <thead>
@@ -138,6 +143,9 @@
                     @endforeach
                     </tbody>
                 </table>
+
+                </div>
+                </div>
             </div>
         </details>
     @endforeach
