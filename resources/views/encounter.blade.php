@@ -14,6 +14,11 @@
 @endsection
 
 @section('content')
+    <style type="text/css">
+        .avatar {
+            border-radius: 16%;
+        }
+    </style>
     <h1 data-boss-id="{{ $stat->boss_id }}" data-area-id="{{$stat->area_id}}"
         data-when="{{ $stat->encounter_unix }}">{{ $stat->toString() }} at {{ $stat->encounter_unix }}</h1>
     <span data-area-id="{{$stat->area_id}}">{{ $stat->getAreaName() }}</span><br>
