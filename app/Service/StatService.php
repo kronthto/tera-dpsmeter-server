@@ -73,8 +73,9 @@ class StatService
         }
 
         $byBoss = [];
+        $unique = !(isset($params['name']) && count($params['name']) === 1);
 
-        $stats->each(function (Stat $stat) use (&$byBoss, $params, $byBossThreshold) {
+        $stats->each(function (Stat $stat) use (&$byBoss, $params, $byBossThreshold, $unique) {
             $key = $stat->area_id.'_'.$stat->boss_id;
             foreach ($stat->data->members as $member) {
                 // Performance
@@ -93,24 +94,29 @@ class StatService
 
                 // Performance: Eliminate those that are certainly out to save memory - Final sorting/slicing is done later
                 if (\count($byBoss[$key]) >= $byBossThreshold * 2) {
-                    $byBoss[$key] = $this->sortUniqueLimitByBoss($byBoss[$key], $byBossThreshold);
+                    $byBoss[$key] = $this->sortUniqueLimitByBoss($byBoss[$key], $byBossThreshold, $unique);
                 }
             }
         });
 
         foreach ($byBoss as $key => &$boss) {
-            $byBoss[$key] = $this->sortUniqueLimitByBoss($boss, $byBossThreshold);
+            $byBoss[$key] = $this->sortUniqueLimitByBoss($boss, $byBossThreshold, $unique);
         }
 
         return $byBoss;
     }
 
-    protected function sortUniqueLimitByBoss(array &$boss, $byBossThreshold)
+    protected function sortUniqueLimitByBoss(array &$boss, $byBossThreshold, $unique = true)
     {
         usort($boss, function ($a, $b) {
             return $b->playerDps - $a->playerDps;
         });
 
-        return collect($boss)->unique('playerName')->slice(0, $byBossThreshold)->toArray();
+        $collection = collect($boss);
+        if ($unique) {
+            $collection = $collection->unique('playerName');
+        }
+
+        return $collection->slice(0, $byBossThreshold)->toArray();
     }
 }
