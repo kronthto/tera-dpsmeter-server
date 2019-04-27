@@ -82,6 +82,7 @@ class DpsController extends Controller
                 if ($member->stat->isRecent()) {
                     $member->rank = $i + 1;
                     $recentEvents[] = $member;
+                    break;
                 }
             }
         }
