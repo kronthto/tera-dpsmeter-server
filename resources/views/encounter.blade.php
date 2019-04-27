@@ -81,7 +81,7 @@
                     <dd>{{ $member->playerTotalDamagePercentage }}</dd>
                 </dl>
 
-                <div class="columns">
+                <div class="columns col-gapless">
                     <div class="column col-6">
 
                 <h4>Skills</h4>
