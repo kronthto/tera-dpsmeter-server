@@ -82,7 +82,7 @@
                 </dl>
 
                 <div class="columns col-gapless">
-                    <div class="column col-6">
+                    <div class="column col-lg-6">
 
                 <h4>Skills</h4>
                 <table class="table table-striped">
@@ -119,7 +119,7 @@
                     </tbody>
                 </table>
 
-                </div> <div class="column col-6">
+                </div> <div class="column col-lg-6">
 
                 <h4>Buffs Uptime</h4>
                 <table class="table table-striped">
