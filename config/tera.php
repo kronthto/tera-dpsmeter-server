@@ -50,7 +50,15 @@ return [
         124, // Vault of Seas Classic
         125, // Vault of Winter Classic
         68, // Shadow Sanguinary (Hard)
-        768, // Shadow Sanguinary
+	768, // Shadow Sanguinary
+	3101, // Goss
+	3102, // DA
+	3103,
+	3104,
+	3106,
+	3026,
+	9070
+
     ],
     'allowedRegionsBosses' => [
         622 => [1000], // Dreadreaper Guardian
