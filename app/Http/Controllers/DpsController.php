@@ -31,7 +31,7 @@ class DpsController extends Controller
 
                 return response()->json([
                     'message' => 'This encounter has already been saved',
-                    'id' => $existing->id,
+                    'id' => route('statDetail', ['stat' => $existing->id]),
                 ]);
             }
             throw $queryException;
@@ -39,7 +39,7 @@ class DpsController extends Controller
 
         return response()->json([
             'message' => 'Encounter saved! Thanks!',
-            'id' => $statEntity->id,
+            'id' => route('statDetail', ['stat' => $statEntity->id]),
         ], Response::HTTP_CREATED);
     }
 
