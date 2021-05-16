@@ -69,7 +69,7 @@ class TeraData
             $data->hotdotMap = $this->hotdotMap;
             $data->skillMap = $this->skillMap;
 
-            \Cache::put('teradata', $data, 180);
+            \Cache::put('teradata', $data, 180*60);
         } else {
             $this->zoneMap = $data->zoneMap;
             $this->monsterMap = $data->monsterMap;
