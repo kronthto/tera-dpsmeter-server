@@ -27,7 +27,7 @@ class StoreDpsData extends FormRequest
         ];
     }
 
-    protected function validationData()
+    public function validationData()
     {
         return (array) json_decode($this->getContent());
     }
